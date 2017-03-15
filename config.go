@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
+	"os"
 )
 
 // Config The application configuration and settings
@@ -32,7 +33,7 @@ type Config struct {
 
 // ParseConfigFile Parses the config.json file
 func ParseConfigFile() Config {
-	file, err := ioutil.ReadFile("config.json")
+	file, err := ioutil.ReadFile(os.Args[1])
 	if err != nil {
 		panic(err)
 	}
