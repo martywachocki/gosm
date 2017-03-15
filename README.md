@@ -42,3 +42,5 @@ The application expects the configuration file to be named config.json. There is
 * Implement SMTP, SMTP-TLS, and TCP checks
 * Optional limits email/sms alerts per second
 * Implement separate check interval for services in pending state (pending_offline_check_interval)
+* Create web UI
+* Redesign to use sqlite database instead of JSON config files
