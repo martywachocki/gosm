@@ -2,7 +2,9 @@ package main
 
 import (
 	"crypto/tls"
+	"net"
 	"net/http"
+	"strconv"
 	"time"
 
 	ping "github.com/sparrc/go-ping"
@@ -36,10 +38,6 @@ func (service *Service) CheckService() bool {
 		return checkICMP(service.Host)
 	case "tcp":
 		return checkTCP(service.Host, service.Port)
-	case "smtp":
-		return checkSMTP(service.Host, service.Port, false)
-	case "smtp-tls":
-		return checkSMTP(service.Host, service.Port, true)
 	default:
 		panic("Unsupported protocol: " + service.Protocol)
 	}
@@ -78,9 +76,10 @@ func checkICMP(host string) bool {
 }
 
 func checkTCP(host string, port int) bool {
-	return false
-}
-
-func checkSMTP(host string, port int, tls bool) bool {
-	return false
+	connection, err := net.Dial("tcp", host+":"+strconv.Itoa(port))
+	defer connection.Close()
+	if err != nil {
+		return false
+	}
+	return true
 }
