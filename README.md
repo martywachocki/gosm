@@ -1,4 +1,4 @@
-# gosm
+# gosm (Work in Progress)
 A program written in Golang for monitoring services using various protocols listed below. Alerts can be sent via SMTP and/or SMS (Twilio API).
 
 ### Supported Protocols
