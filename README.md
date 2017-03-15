@@ -1,5 +1,5 @@
 # gosm (Work In Progress)
-A program written in Golang for monitoring services using various protocols listed below.
+A program written in Golang for monitoring services using various protocols listed below. Alerts can be sent via SMTP and/or SMS (Twilio API).
 
 ### Supported Protocols
 * HTTP
@@ -10,11 +10,12 @@ A program written in Golang for monitoring services using various protocols list
 * TCP
 
 ### Config
-There is an example config file in the repo named config.example.json to use as a start. Below is a brief description of each configuration item.
+There is an example config file in the repo named config.example.json to use as a start. Below is a brief description of each configuration item. All items are required unless explicity stated.
+* **verbose** - Whether or not to print information to the console
 * **check_interval** - How often to check each service that is in an online state (seconds)
 * **pending_offline_interval** - How often to check each service is in a pending or offline state (seconds)
 * **max_concurrent_checks** - The maximum concurrent checks
-* **icmp_timeout** - The ICMP timeout in milliseconds
+* **icmp_timeout** - Timeout threshold for ICMP (milliseconds)
 * **successful_http_status_codes** - Which HTTP/HTTPS status codes are considered successful. Any status code not listed will be considered a failure response
 * **ignore_http_cert_errors** - Whether or not to ignore HTTPS cert errors
 * **failed_check_threshold** - How many consecutive failed checks are needed to consider a service offline
@@ -22,8 +23,18 @@ There is an example config file in the repo named config.example.json to use as 
 * **email_recipients** - Recipients of email alerts
 * **send_sms** - Whether or not to send alerts via sms
 * **sms_recipients** - Recipients of sms alerts
+* **twilio_account_sid** - Your Twilio Account SID
+* **twilio_auth_token** - Your Twilio Auth Token
+* **twilio_from_number** - Your Twilio phone number to send the SMS alerts from
 * **services** - a list of services to monitor
     * **name** - The name of the service
     * **protocol** - The protocol of the service
     * **host** - The hostname or ip address of the service
-    * **port** - The port of the service
+    * **port** - The port of the service (optional for HTTP, HTTPS, and ICMP)
+
+
+### TODO
+* Implement SMTP, SMTP_TLS, and TCP checks
+* Implement email alerts
+* Optional limits email/sms alerts per second
+* Implement separate check interval for services in pending state (pending_offline_check_interval)

@@ -10,11 +10,11 @@ import (
 
 const (
 	//Online The service is online
-	Online = "Online"
+	Online = "ONLINE"
 	// Pending The service is potentially offline, and will be marked so after meeting the Config.FailedCheckThreshold
-	Pending = "Pending"
+	Pending = "PENDING"
 	// Offline The service is offline
-	Offline = "Offline"
+	Offline = "OFFLINE"
 )
 
 // Service Represents a service that is being monitored
@@ -31,7 +31,7 @@ type Service struct {
 func (service *Service) CheckService() bool {
 	switch service.Protocol {
 	case "http", "https":
-		return checkHTTP(service.Host, service.Port)
+		return checkHTTP(service.Host)
 	case "icmp":
 		return checkICMP(service.Host)
 	case "tcp":
@@ -45,7 +45,7 @@ func (service *Service) CheckService() bool {
 	}
 }
 
-func checkHTTP(host string, port int) bool {
+func checkHTTP(host string) bool {
 	transport := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: CurrentConfig.IgnoreHTTPCertErrors},
 	}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -52,6 +53,9 @@ func checkServices() {
 			if service.Status == Online {
 				service.Status = Pending
 				service.FailureCount = 1
+				if CurrentConfig.Verbose {
+					fmt.Println(service.Name + " is now in the " + service.Status + " state")
+				}
 			} else if service.Status == Pending {
 				service.FailureCount++
 				if service.FailureCount >= CurrentConfig.FailedCheckThreshold {

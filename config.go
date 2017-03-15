@@ -7,6 +7,7 @@ import (
 
 // Config The application configuration and settings
 type Config struct {
+	Verbose                     bool      `json:"verbose"`
 	CheckInterval               int       `json:"check_interval"`
 	PendingOfflineCheckInterval int       `json:"pending_offline_check_interval"`
 	MaxConcurrentChecks         int       `json:"max_concurrent_checks"`
@@ -18,6 +19,9 @@ type Config struct {
 	EmailRecipients             []string  `json:"email_recipients"`
 	SendSMS                     bool      `json:"send_sms"`
 	SMSRecipients               []string  `json:"sms_recipients"`
+	TwilioAccountSID            string    `json:"twilio_account_sid"`
+	TwilioAuthToken             string    `json:"twilio_auth_token"`
+	TwilioPhoneNumber           string    `json:"twilio_phone_number"`
 	Services                    []Service `json:"services"`
 }
 
