@@ -23,8 +23,7 @@
         {
             "name": "Example.com website",
             "protocol": "http",
-            "host": "http://example.com/",
-            "port": 80
+            "host": "http://example.com/"
         }
     ]
 }
