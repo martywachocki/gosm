@@ -27,17 +27,36 @@ func main() {
 		os.Exit(1)
 	}()
 
-	go checkServices()
+	go processChecks()
+	go checkOnlineServices()
+	checkPendingOfflineServices()
+}
+
+func checkOnlineServices() {
 	for {
 		for i := range CurrentConfig.Services {
-			checkCountChannel <- true
-			checkChannel <- &CurrentConfig.Services[i]
+			if CurrentConfig.Services[i].Status != Online {
+				checkCountChannel <- true
+				checkChannel <- &CurrentConfig.Services[i]
+			}
+		}
+		time.Sleep(time.Second * time.Duration(CurrentConfig.PendingOfflineCheckInterval))
+	}
+}
+
+func checkPendingOfflineServices() {
+	for {
+		for i := range CurrentConfig.Services {
+			if CurrentConfig.Services[i].Status == Online {
+				checkCountChannel <- true
+				checkChannel <- &CurrentConfig.Services[i]
+			}
 		}
 		time.Sleep(time.Second * time.Duration(CurrentConfig.CheckInterval))
 	}
 }
 
-func checkServices() {
+func processChecks() {
 	for {
 		service := <-checkChannel
 		online := service.CheckService()
