@@ -7,6 +7,19 @@ A program written in Golang for monitoring services using various protocols list
 * ICMP
 * TCP
 
+### Installation
+~~~
+# Download and install dependencies
+$ go get -u github.com/gogits/gogs
+
+# Build program
+$ cd $GOPATH/src/github.com/gogits/gogs
+$ go build
+
+# Run program
+$ ./gosm
+~~~ 
+
 ### Config
 The application expects the configuration file to be named config.json. There is an example config file in the repo named config.example.json to use as a reference. Below is a brief description of each configuration item. All items are required unless explicity stated.
 * **verbose** - Whether or not to print information to the console
