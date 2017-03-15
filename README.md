@@ -10,7 +10,7 @@ A program written in Golang for monitoring services using various protocols list
 * TCP
 
 ### Config
-There is an example config file in the repo named config.example.json to use as a start. Below is a brief description of each configuration item. All items are required unless explicity stated.
+The application expects the configuration file to be named config.json. There is an example config file in the repo named config.example.json to use as a reference. Below is a brief description of each configuration item. All items are required unless explicity stated.
 * **verbose** - Whether or not to print information to the console
 * **check_interval** - How often to check each service that is in an online state (seconds)
 * **pending_offline_interval** - How often to check each service is in a pending or offline state (seconds)
@@ -34,7 +34,7 @@ There is an example config file in the repo named config.example.json to use as 
 
 
 ### TODO
-* Implement SMTP, SMTP_TLS, and TCP checks
+* Implement SMTP, SMTP-TLS, and TCP checks
 * Implement email alerts
 * Optional limits email/sms alerts per second
 * Implement separate check interval for services in pending state (pending_offline_check_interval)
