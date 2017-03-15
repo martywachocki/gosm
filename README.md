@@ -21,6 +21,11 @@ The application expects the configuration file to be named config.json. There is
 * **failed_check_threshold** - How many consecutive failed checks are needed to consider a service offline
 * **send_email** - Whether or not to send alerts via email
 * **email_recipients** - Recipients of email alerts
+* **smtp_host** - The SMTP server host to send emails from
+* **smtp_port** - The SMTP server port
+* **smtp_email_address** - The email address to send from
+* **smtp_username** - The username for the SMTP server
+* **smtp_password** - The password for the SMTP server
 * **send_sms** - Whether or not to send alerts via sms
 * **sms_recipients** - Recipients of sms alerts
 * **twilio_account_sid** - Your Twilio Account SID
@@ -35,6 +40,5 @@ The application expects the configuration file to be named config.json. There is
 
 ### TODO
 * Implement SMTP, SMTP-TLS, and TCP checks
-* Implement email alerts
 * Optional limits email/sms alerts per second
 * Implement separate check interval for services in pending state (pending_offline_check_interval)

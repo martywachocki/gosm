@@ -17,6 +17,11 @@ type Config struct {
 	FailedCheckThreshold        int       `json:"failed_check_threshold"`
 	SendEmail                   bool      `json:"send_email"`
 	EmailRecipients             []string  `json:"email_recipients"`
+	SMTPHost                    string    `json:"smtp_host"`
+	SMTPPort                    int       `json:"smtp_port"`
+	SMTPEmailAddress            string    `json:"smtp_email_address"`
+	SMTPUsername                string    `json:"smtp_username"`
+	SMTPPassword                string    `json:"smtp_password"`
 	SendSMS                     bool      `json:"send_sms"`
 	SMSRecipients               []string  `json:"sms_recipients"`
 	TwilioAccountSID            string    `json:"twilio_account_sid"`
@@ -41,7 +46,7 @@ func ParseConfigFile() Config {
 }
 
 func (config *Config) setupServices() {
-	for i, _ := range config.Services {
+	for i := range config.Services {
 		config.Services[i].Status = Online
 		config.Services[i].FailureCount = 0
 	}
