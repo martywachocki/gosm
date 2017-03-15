@@ -10,10 +10,10 @@ A program written in Golang for monitoring services using various protocols list
 ### Installation
 ~~~
 # Download and install dependencies
-$ go get -u github.com/gogits/gogs
+$ go get -u github.com/MartinWachocki/gosm
 
 # Build program
-$ cd $GOPATH/src/github.com/gogits/gogs
+$ cd $GOPATH/src/github.com/MartinWachocki/gosm
 $ go build
 
 # Run program
