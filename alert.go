@@ -31,8 +31,9 @@ func sendEmailAlert(service Service) {
 	message += service.Name + " is now " + service.Status + "\r\n"
 	message += "Protocol: " + service.Protocol + "\r\n"
 	message += "Host: " + service.Host + "\r\n"
-	message += "Port: " + strconv.Itoa(service.Port) + "\r\n"
-
+	if service.Port != 0 {
+		message += "Port: " + strconv.Itoa(service.Port) + "\r\n"
+	}
 	err := smtp.SendMail(
 		CurrentConfig.SMTPHost+":"+strconv.Itoa(CurrentConfig.SMTPPort),
 		auth, CurrentConfig.SMTPEmailAddress,
@@ -46,7 +47,7 @@ func sendEmailAlert(service Service) {
 func sendSMSAlert(service Service) {
 	twilio := gotwilio.NewTwilioClient(CurrentConfig.TwilioAccountSID, CurrentConfig.TwilioAuthToken)
 	for _, number := range CurrentConfig.SMSRecipients {
-		_, exception, err := twilio.SendSMS(CurrentConfig.TwilioPhoneNumber, number, "gosm - "+service.Name+" ("+service.Protocol+") is now "+service.Status, "", "")
+		_, exception, err := twilio.SendSMS(CurrentConfig.TwilioPhoneNumber, number, "[gosm] "+service.Name+" ("+service.Protocol+") is now "+service.Status, "", "")
 		if exception != nil {
 			fmt.Println(err)
 		}
