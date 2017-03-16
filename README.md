@@ -28,7 +28,7 @@ The application expects the configuration file to be named config.json. There is
 * **max_concurrent_checks** - The maximum concurrent checks
 * **icmp_timeout** - Timeout threshold for ICMP (milliseconds)
 * **successful_http_status_codes** - Which HTTP/HTTPS status codes are considered successful. Any status code not listed will be considered a failure response
-* **ignore_http_cert_errors** - Whether or not to ignore HTTPS cert errors
+* **ignore_https_cert_errors** - Whether or not to ignore HTTPS cert errors
 * **failed_check_threshold** - How many consecutive failed checks are needed to consider a service offline
 * **send_email** - Whether or not to send alerts via email
 * **email_recipients** - Recipients of email alerts

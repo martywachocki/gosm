@@ -14,7 +14,7 @@ type Config struct {
 	MaxConcurrentChecks         int       `json:"max_concurrent_checks"`
 	ICMPTimeout                 int       `json:"icmp_timeout"`
 	SuccessfulHTTPStatusCodes   []int     `json:"successful_http_status_codes"`
-	IgnoreHTTPCertErrors        bool      `json:"ignore_http_cert_errors"`
+	IgnoreHTTPSCertErrors       bool      `json:"ignore_https_cert_errors"`
 	FailedCheckThreshold        int       `json:"failed_check_threshold"`
 	SendEmail                   bool      `json:"send_email"`
 	EmailRecipients             []string  `json:"email_recipients"`

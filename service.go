@@ -45,7 +45,7 @@ func (service *Service) CheckService() bool {
 
 func checkHTTP(host string) bool {
 	transport := &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: CurrentConfig.IgnoreHTTPCertErrors},
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: CurrentConfig.IgnoreHTTPSCertErrors},
 	}
 	client := &http.Client{Transport: transport}
 	resp, err := client.Get(host)
