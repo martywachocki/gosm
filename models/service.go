@@ -1,4 +1,4 @@
-package main
+package models
 
 import (
 	"crypto/tls"
@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	ping "github.com/sparrc/go-ping"
+	"github.com/sparrc/go-ping"
 )
 
 const (
@@ -25,9 +25,13 @@ type Service struct {
 	Protocol     string `json:"protocol"`
 	Host         string `json:"host"`
 	Port         int    `json:"port"`
-	Status       string
-	FailureCount int
+	Status       string `json:"status"`
+	FailureCount int    `json:"failure_count"`
 }
+
+var (
+	CurrentConfig Config
+)
 
 // CheckService Checks whether a service is online or offline
 func (service *Service) CheckService() bool {

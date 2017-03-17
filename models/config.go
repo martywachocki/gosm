@@ -1,4 +1,4 @@
-package main
+package models
 
 import (
 	"encoding/json"
@@ -33,6 +33,9 @@ type Config struct {
 
 // ParseConfigFile Parses the config.json file
 func ParseConfigFile() Config {
+	if len(os.Args) < 2 {
+		panic("Expected run syntax: './gosm /path/to/config.json'")
+	}
 	file, err := ioutil.ReadFile(os.Args[1])
 	if err != nil {
 		panic(err)
