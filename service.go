@@ -48,11 +48,12 @@ func checkHTTP(host string) bool {
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: CurrentConfig.IgnoreHTTPSCertErrors},
 	}
 	client := &http.Client{Transport: transport}
-	resp, err := client.Get(host)
+	response, err := client.Get(host)
 	if err != nil {
 		return false
 	}
-	var responseStatusCode = resp.StatusCode
+	defer response.Body.Close()
+	var responseStatusCode = response.StatusCode
 	var isValidStatusCode = false
 	for _, statusCode := range CurrentConfig.SuccessfulHTTPStatusCodes {
 		if responseStatusCode == statusCode {
