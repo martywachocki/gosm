@@ -1,4 +1,4 @@
-# gosm (Work in Progress)
+# gosm
 A program written in Golang for monitoring services using various protocols listed below. Alerts can be sent via SMTP and/or SMS (Twilio API).
 
 ### Supported Protocols
@@ -52,5 +52,5 @@ The application expects the configuration file to be named config.json. There is
 ### TODO
 * Implement SMTP and SMTP-TLS checks
 * Optional limits email/sms alerts per second
-* Create web UI
 * Redesign to use sqlite database instead of JSON config files
+* Create web UI for viewing service statuses, adding/editing/removing services, and reporting on service status history
