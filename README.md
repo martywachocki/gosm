@@ -20,6 +20,9 @@ $ go build
 $ ./gosm
 ~~~ 
 
+### Web UI
+By default, the web UI listens on :8080, and can be accessed in your browser at http://localhost:8080
+
 ### Config
 The application expects the configuration file to be named config.json. There is an example config file in the repo named config.example.json to use as a reference. Below is a brief description of each configuration item. All items are required unless explicity stated.
 * **verbose** - Whether or not to print information to the console
@@ -53,4 +56,4 @@ The application expects the configuration file to be named config.json. There is
 * Implement SMTP and SMTP-TLS checks
 * Optional limits email/sms alerts per second
 * Redesign to use sqlite database instead of JSON config files
-* Create web UI for viewing service statuses, adding/editing/removing services, and reporting on service status history
+* Adding/editing/removing services, and reporting on service status history
