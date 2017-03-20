@@ -84,10 +84,10 @@ func checkICMP(host string) bool {
 
 func checkTCP(host string, port int64) bool {
 	connection, err := net.Dial("tcp", host+":"+strconv.FormatInt(port, 10))
-	defer connection.Close()
 	if err != nil {
 		return false
 	}
+	defer connection.Close()
 	return true
 }
 

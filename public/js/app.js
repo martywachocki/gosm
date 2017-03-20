@@ -63,18 +63,39 @@ $(function() {
 
     $('select[name=protocol]').on('change', function() {
         var port = $(this).closest('form').find('input[name=port]').closest('.form-group');
-        console.log($(this).val());
         if ($(this).val() != 'http' && $(this).val() != 'https' && $(this).val() != 'icmp') {
-            console.log('show');
             port.show();
         } else {
-            console.log('hide');
             port.hide();
         }
     });
 
+    $('#add-service-button').click(function() {
+        $('#add-service-modal input').val('');
+        $('#add-service-modal').modal();
+    });
+
     $('#services-table').on('click', '.edit-service', function() {
-        
+        var id = $(this).closest('tr').data('id');
+        $.ajax({
+            url: '/services/' + id,
+            method: 'GET',
+            success: function(service) {
+                var port = $('#edit-service-modal').find('input[name=port]').closest('.form-group');
+                if (service.protocol != 'http' && service.protocol != 'https' && service.protocol != 'icmp') {
+                    port.show();
+                } else {
+                    port.hide();
+                }
+
+                $('#edit-service-modal input[name=id]').val(service.id);
+                $('#edit-service-modal input[name=name]').val(service.name);
+                $('#edit-service-modal select[name=protocol]').val(service.protocol);
+                $('#edit-service-modal input[name=host]').val(service.host);
+                $('#edit-service-modal input[name=port]').val(service.port);
+                $('#edit-service-modal').modal();
+            }
+        });
     });
 
     $('#services-table').on('click', '.delete-service', function() {
@@ -104,7 +125,6 @@ $(function() {
     $('#add-service-form').submit(function(e) {
         e.preventDefault();
         var service = $(this).serialize();
-        console.log(service);
         $.modal.close();
 
          $.ajax({
@@ -112,10 +132,30 @@ $(function() {
             method: 'POST',
             data: service,
             success: function() {
-                console.log('here')
                 swal({
                     title: 'Success',
                     text: 'The service "' + service.name + '" has been added successfully',
+                    type: 'success'
+                });
+                getServices();     
+            }
+        });
+    });
+
+
+    $('#edit-service-form').submit(function(e) {
+        e.preventDefault();
+        var service = $(this).serialize();
+        var id = $(this).find('input[name=id]').val();
+        $.modal.close();
+         $.ajax({
+            url: '/services/' + id,
+            method: 'PUT',
+            data: service,
+            success: function() {
+                swal({
+                    title: 'Success',
+                    text: 'The service "' + service.name + '" has been updated successfully',
                     type: 'success'
                 });
                 getServices();     

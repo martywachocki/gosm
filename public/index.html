@@ -29,7 +29,7 @@
     <div class="container">
         <div class="row vertical-spacer">
             <div class="col-sm-12 text-right">
-                <a class="btn btn-success" href="#add-service-modal" rel="modal:open">Add Service</a>
+                <button class="btn btn-success" id="add-service-button">Add Service</button>
             </div>
         </div>
 
@@ -81,6 +81,38 @@
             <div class="form-group text-right">
                 <button class="btn btn-danger">Cancel</button>
                 <button class="btn btn-success">Add Service</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="edit-service-modal" class="modal" style="display: none;">
+        <h3>Edit Service</h3>
+        <form id="edit-service-form">
+            <input type="hidden" name="id">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" name="name">
+            </div>
+            <div class="form-group">
+                <label>Protocol</label>
+                <select class="form-control" name="protocol">
+                    <option value="http">HTTP</option>
+                    <option value="https">HTTPS</option>
+                    <option value="icmp">ICMP</option>
+                    <option value="tcp">TCP</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Host</label>
+                <input type="text" class="form-control" placeholder="Host" name="host">
+            </div>
+            <div class="form-group" style="display: none;">
+                <label>Port</label>
+                <input type="number" class="form-control" placeholder="Port" name="port">
+            </div>
+            <div class="form-group text-right">
+                <button class="btn btn-danger">Cancel</button>
+                <button class="btn btn-success">Update Service</button>
             </div>
         </form>
     </div>

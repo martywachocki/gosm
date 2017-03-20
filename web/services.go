@@ -34,10 +34,15 @@ func service(writer http.ResponseWriter, request *http.Request) {
 	switch request.Method {
 	case "GET":
 		var service models.Service
-		models.Database.Select(&service, "SELECT * FROM services WHERE id='"+vars["serviceID"]+"'")
-		payload, _ = json.Marshal(services)
+		models.Database.Get(&service, "SELECT * FROM services WHERE id='"+vars["serviceID"]+"'")
+		payload, _ = json.Marshal(service)
 	case "PUT":
-		// TODO: update service
+		request.ParseForm()
+		port := "NULL"
+		if request.FormValue("port") != "" {
+			port = "'" + request.FormValue("port") + "'"
+		}
+		models.Database.MustExec("UPDATE services SET name='" + request.FormValue("name") + "', protocol='" + request.FormValue("protocol") + "', host='" + request.FormValue("host") + "', port=" + port + " WHERE id='" + vars["serviceID"] + "'")
 		models.LoadServices()
 	case "DELETE":
 		models.Database.MustExec("DELETE FROM services WHERE id='" + vars["serviceID"] + "'")
