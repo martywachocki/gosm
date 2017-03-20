@@ -22,6 +22,7 @@ func services(writer http.ResponseWriter, request *http.Request) {
 		}
 		models.Database.MustExec("INSERT INTO services (name, protocol, host, port) VALUES('" + request.FormValue("name") + "', '" + request.FormValue("protocol") + "', '" + request.FormValue("host") + "', " + port + ")")
 		models.LoadServices()
+		payload = []byte("{\"success\":true}")
 	}
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Write(payload)
@@ -44,6 +45,7 @@ func service(writer http.ResponseWriter, request *http.Request) {
 		}
 		models.Database.MustExec("UPDATE services SET name='" + request.FormValue("name") + "', protocol='" + request.FormValue("protocol") + "', host='" + request.FormValue("host") + "', port=" + port + " WHERE id='" + vars["serviceID"] + "'")
 		models.LoadServices()
+		payload = []byte("{\"success\":true}")
 	case "DELETE":
 		models.Database.MustExec("DELETE FROM services WHERE id='" + vars["serviceID"] + "'")
 		models.LoadServices()

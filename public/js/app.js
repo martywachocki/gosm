@@ -126,7 +126,7 @@ $(function() {
         e.preventDefault();
         var service = $(this).serialize();
         $.modal.close();
-
+        var name = $(this).find('input[name=name]').val();
          $.ajax({
             url: '/services',
             method: 'POST',
@@ -134,7 +134,7 @@ $(function() {
             success: function() {
                 swal({
                     title: 'Success',
-                    text: 'The service "' + service.name + '" has been added successfully',
+                    text: 'The service "' + name + '" has been added successfully',
                     type: 'success'
                 });
                 getServices();     
@@ -147,15 +147,17 @@ $(function() {
         e.preventDefault();
         var service = $(this).serialize();
         var id = $(this).find('input[name=id]').val();
+        var name = $(this).find('input[name=name]').val();
         $.modal.close();
          $.ajax({
             url: '/services/' + id,
             method: 'PUT',
             data: service,
             success: function() {
+                console.log('test');
                 swal({
                     title: 'Success',
-                    text: 'The service "' + service.name + '" has been updated successfully',
+                    text: 'The service "' + name + '" has been updated successfully',
                     type: 'success'
                 });
                 getServices();     
