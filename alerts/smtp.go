@@ -18,8 +18,8 @@ func sendSMTPAlert(service models.Service) {
 	message += service.Name + " is now " + service.Status + "\r\n"
 	message += "Protocol: " + service.Protocol + "\r\n"
 	message += "Host: " + service.Host + "\r\n"
-	if service.Port != 0 {
-		message += "Port: " + strconv.Itoa(service.Port) + "\r\n"
+	if service.Port.Value != nil {
+		message += "Port: " + strconv.FormatInt(service.Port.Int64, 10) + "\r\n"
 	}
 	err := smtp.SendMail(
 		models.CurrentConfig.SMTPHost+":"+strconv.Itoa(models.CurrentConfig.SMTPPort),

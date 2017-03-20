@@ -23,10 +23,13 @@ func Start() {
 
 func checkOnlineServices() {
 	for {
-		for i := range models.CurrentConfig.Services {
-			if models.CurrentConfig.Services[i].Status != models.Online {
+		for i := range models.CurrentServices {
+			if len(models.CurrentServices) <= i {
+				break
+			}
+			if models.CurrentServices[i].Status != models.Online {
 				checkCountChannel <- true
-				checkChannel <- &models.CurrentConfig.Services[i]
+				checkChannel <- &models.CurrentServices[i]
 			}
 		}
 		time.Sleep(time.Second * time.Duration(models.CurrentConfig.PendingOfflineCheckInterval))
@@ -35,10 +38,13 @@ func checkOnlineServices() {
 
 func checkPendingOfflineServices() {
 	for {
-		for i := range models.CurrentConfig.Services {
-			if models.CurrentConfig.Services[i].Status == models.Online {
+		for i := range models.CurrentServices {
+			if len(models.CurrentServices) <= i {
+				break
+			}
+			if models.CurrentServices[i].Status == models.Online {
 				checkCountChannel <- true
-				checkChannel <- &models.CurrentConfig.Services[i]
+				checkChannel <- &models.CurrentServices[i]
 			}
 		}
 		time.Sleep(time.Second * time.Duration(models.CurrentConfig.CheckInterval))

@@ -6,3 +6,12 @@
     margin-top: 15px;;
     margin-bottom: 15px;
 }
+
+.modal a.close-modal {
+    top: 0px;
+    right: 0px;
+}
+
+a.btn:focus {
+    color: inherit;
+}

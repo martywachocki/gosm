@@ -18,12 +18,5 @@
     "sms_recipients": ["+18001234567"],
     "twilio_account_sid": "YOUR_TWILIO_ACCOUNT_SID",
     "twilio_auth_token": "YOUR_TWILIO_AUTH_TOKEN",
-    "twilio_phone_number": "YOUR_TWILIO_PHONE_NUMBER",
-    "services": [
-        {
-            "name": "Example.com website",
-            "protocol": "http",
-            "host": "http://example.com/"
-        }
-    ]
+    "twilio_phone_number": "YOUR_TWILIO_PHONE_NUMBER"
 }

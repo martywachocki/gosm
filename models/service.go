@@ -21,16 +21,18 @@ const (
 
 // Service Represents a service that is being monitored
 type Service struct {
-	Name         string `json:"name"`
-	Protocol     string `json:"protocol"`
-	Host         string `json:"host"`
-	Port         int    `json:"port"`
-	Status       string `json:"status"`
-	FailureCount int    `json:"failure_count"`
+	ID           int           `db:"id" json:"id"`
+	Name         string        `db:"name" json:"name"`
+	Protocol     string        `db:"protocol" json:"protocol"`
+	Host         string        `db:"host" json:"host"`
+	Port         jsonNullInt64 `db:"port" json:"port"`
+	Status       string        `json:"status"`
+	FailureCount int           `json:"failure_count"`
 }
 
 var (
-	CurrentConfig Config
+	// CurrentServices The currently monitored services
+	CurrentServices []Service
 )
 
 // CheckService Checks whether a service is online or offline
@@ -41,7 +43,7 @@ func (service *Service) CheckService() bool {
 	case "icmp":
 		return checkICMP(service.Host)
 	case "tcp":
-		return checkTCP(service.Host, service.Port)
+		return checkTCP(service.Host, service.Port.Int64)
 	default:
 		panic("Unsupported protocol: " + service.Protocol)
 	}
@@ -80,11 +82,22 @@ func checkICMP(host string) bool {
 	return statistics.PacketsSent == statistics.PacketsRecv
 }
 
-func checkTCP(host string, port int) bool {
-	connection, err := net.Dial("tcp", host+":"+strconv.Itoa(port))
+func checkTCP(host string, port int64) bool {
+	connection, err := net.Dial("tcp", host+":"+strconv.FormatInt(port, 10))
 	defer connection.Close()
 	if err != nil {
 		return false
 	}
 	return true
+}
+
+// LoadServices Loads all the services into CurrentServices and sets defaults
+func LoadServices() {
+	var services []Service
+	Database.Select(&services, "SELECT * FROM services")
+
+	for i := range services {
+		services[i].Status = Online
+	}
+	CurrentServices = services
 }

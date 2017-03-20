@@ -18,6 +18,8 @@ var (
 func main() {
 	fixSIGTERM()
 	models.CurrentConfig = models.ParseConfigFile()
+	models.Connect()
+	models.LoadServices()
 	go web.Start()
 	checker.Start()
 }

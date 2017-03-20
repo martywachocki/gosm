@@ -21,7 +21,7 @@ $ ./gosm
 ~~~ 
 
 ### Web UI
-By default, the web UI listens on :8080, and can be accessed in your browser at http://localhost:8080
+By default, the web UI listens on :8080, and can be accessed in your browser at http://localhost:8080. The web UI currently gives you access to view the realtime status of your services, and add/edit/remove services. 
 
 ### Config
 The application expects the configuration file to be named config.json. There is an example config file in the repo named config.example.json to use as a reference. Below is a brief description of each configuration item. All items are required unless explicity stated.
@@ -45,11 +45,6 @@ The application expects the configuration file to be named config.json. There is
 * **twilio_account_sid** - Your Twilio Account SID
 * **twilio_auth_token** - Your Twilio Auth Token
 * **twilio_from_number** - Your Twilio phone number to send the SMS alerts from
-* **services** - a list of services to monitor
-    * **name** - The name of the service
-    * **protocol** - The protocol of the service
-    * **host** - The hostname or ip address of the service
-    * **port** - The port of the service (optional for HTTP, HTTPS, and ICMP)
 
 
 ### TODO

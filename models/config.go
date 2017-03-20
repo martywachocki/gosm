@@ -8,28 +8,32 @@ import (
 
 // Config The application configuration and settings
 type Config struct {
-	Verbose                     bool      `json:"verbose"`
-	CheckInterval               int       `json:"check_interval"`
-	PendingOfflineCheckInterval int       `json:"pending_offline_check_interval"`
-	MaxConcurrentChecks         int       `json:"max_concurrent_checks"`
-	ICMPTimeout                 int       `json:"icmp_timeout"`
-	SuccessfulHTTPStatusCodes   []int     `json:"successful_http_status_codes"`
-	IgnoreHTTPSCertErrors       bool      `json:"ignore_https_cert_errors"`
-	FailedCheckThreshold        int       `json:"failed_check_threshold"`
-	SendEmail                   bool      `json:"send_email"`
-	EmailRecipients             []string  `json:"email_recipients"`
-	SMTPHost                    string    `json:"smtp_host"`
-	SMTPPort                    int       `json:"smtp_port"`
-	SMTPEmailAddress            string    `json:"smtp_email_address"`
-	SMTPUsername                string    `json:"smtp_username"`
-	SMTPPassword                string    `json:"smtp_password"`
-	SendSMS                     bool      `json:"send_sms"`
-	SMSRecipients               []string  `json:"sms_recipients"`
-	TwilioAccountSID            string    `json:"twilio_account_sid"`
-	TwilioAuthToken             string    `json:"twilio_auth_token"`
-	TwilioPhoneNumber           string    `json:"twilio_phone_number"`
-	Services                    []Service `json:"services"`
+	Verbose                     bool     `json:"verbose"`
+	CheckInterval               int      `json:"check_interval"`
+	PendingOfflineCheckInterval int      `json:"pending_offline_check_interval"`
+	MaxConcurrentChecks         int      `json:"max_concurrent_checks"`
+	ICMPTimeout                 int      `json:"icmp_timeout"`
+	SuccessfulHTTPStatusCodes   []int    `json:"successful_http_status_codes"`
+	IgnoreHTTPSCertErrors       bool     `json:"ignore_https_cert_errors"`
+	FailedCheckThreshold        int      `json:"failed_check_threshold"`
+	SendEmail                   bool     `json:"send_email"`
+	EmailRecipients             []string `json:"email_recipients"`
+	SMTPHost                    string   `json:"smtp_host"`
+	SMTPPort                    int      `json:"smtp_port"`
+	SMTPEmailAddress            string   `json:"smtp_email_address"`
+	SMTPUsername                string   `json:"smtp_username"`
+	SMTPPassword                string   `json:"smtp_password"`
+	SendSMS                     bool     `json:"send_sms"`
+	SMSRecipients               []string `json:"sms_recipients"`
+	TwilioAccountSID            string   `json:"twilio_account_sid"`
+	TwilioAuthToken             string   `json:"twilio_auth_token"`
+	TwilioPhoneNumber           string   `json:"twilio_phone_number"`
 }
+
+var (
+	// CurrentConfig The current configuration
+	CurrentConfig Config
+)
 
 // ParseConfigFile Parses the config.json file
 func ParseConfigFile() Config {
@@ -45,13 +49,5 @@ func ParseConfigFile() Config {
 	if err != nil {
 		panic(err)
 	}
-	config.setupServices()
 	return config
-}
-
-func (config *Config) setupServices() {
-	for i := range config.Services {
-		config.Services[i].Status = Online
-		config.Services[i].FailureCount = 0
-	}
 }
