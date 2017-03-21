@@ -3,6 +3,7 @@ A program written in Golang for monitoring services using various protocols list
 
 ![](http://i.imgur.com/Upsmhcy.png)
 
+
 ### Supported Protocols
 * HTTP
 * HTTPS
@@ -27,6 +28,9 @@ $ vi config.json
 # Run program and supply path to config file
 $ ./gosm /path/to/config.json
 ~~~ 
+
+### Current Build Version - 1.0
+You can check the version of your build by running ``./gosm version``
 
 ### Web UI
 By default, the web UI listens on localhost on port 8030, and can be accessed in your browser at http://127.0.0.1:8030. The web UI currently gives you access to view the realtime status of your services, and add/edit/remove services. 

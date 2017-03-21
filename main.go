@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -10,12 +11,20 @@ import (
 	"github.com/martywachocki/gosm/web"
 )
 
+const (
+	version = 1.0
+)
+
 var (
 	checkChannel      = make(chan *models.Service)
 	checkCountChannel chan (bool)
 )
 
 func main() {
+	if len(os.Args) > 1 && os.Args[1] == "version" {
+		fmt.Printf("%.2f\n", version)
+		return
+	}
 	fixSIGTERM()
 	models.CurrentConfig = models.ParseConfigFile()
 	models.Connect()
