@@ -106,7 +106,8 @@ func LoadServices() {
 		services[i].Status = Online
 		for j := range CurrentServices {
 			if CurrentServices[j].ID == services[i].ID {
-				services[i] = CurrentServices[i]
+				services[i].Status = CurrentServices[i].Status
+				services[i].FailureCount = CurrentServices[i].FailureCount
 				break
 			}
 		}
