@@ -18,6 +18,12 @@ $ go get -u github.com/martywachocki/gosm
 $ cd $GOPATH/src/github.com/martywachocki/gosm
 $ go build
 
+# Copy config.example.json to config.json
+$ cp config.example.json config.json
+
+# Modify config.json with your preferred settings
+$ vi config.json
+
 # Run program and supply path to config file
 $ ./gosm /path/to/config.json
 ~~~ 
