@@ -154,7 +154,6 @@ $(function() {
             method: 'PUT',
             data: service,
             success: function() {
-                console.log('test');
                 swal({
                     title: 'Success',
                     text: 'The service "' + name + '" has been updated successfully',
@@ -166,6 +165,6 @@ $(function() {
     });
 
     getServices();
-    setInterval(getServices, 2000);
+    // setInterval(getServices, 2000);
 
 });

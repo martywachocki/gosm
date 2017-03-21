@@ -1,9 +1,22 @@
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 125px;
+    min-height: 100%;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+}
+
 .navbar {
     background: #333;
 }
 
 .vertical-spacer {
-    margin-top: 15px;;
+    margin-top: 15px;
     margin-bottom: 15px;
 }
 
@@ -12,6 +25,21 @@
     right: 0px;
 }
 
-a.btn:focus {
-    color: inherit;
+.btn {
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #efefef;
+    text-align: center;
+}
+
+.footer p {
+    margin: 15px 0;
+    font-size: 12px;
 }
