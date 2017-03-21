@@ -52,7 +52,7 @@ There is an example config file in the repo named config.example.json to use as 
 
 
 ### TODO
-* Implement SMTP and SMTP-TLS checksgi9t
+* Implement SMTP and SMTP-TLS checks
 * Add optional limits for email/sms alerts per second
 * Add service status history to web UI
 * Refactor to store config items in sqlite database and modify through web UI instead of JSON file
