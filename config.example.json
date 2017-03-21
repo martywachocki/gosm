@@ -3,7 +3,7 @@
     "check_interval": 30,
     "pending_offline_check_interval": 5,
     "max_concurrent_checks": 5,
-    "icmp_timeout": 1500,
+    "connection_timeout": 1500,
     "successful_http_status_codes": [200],
     "ignore_http_cert_errors": false,
     "failed_check_threshold": 5,

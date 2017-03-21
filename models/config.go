@@ -12,7 +12,7 @@ type Config struct {
 	CheckInterval               int      `json:"check_interval"`
 	PendingOfflineCheckInterval int      `json:"pending_offline_check_interval"`
 	MaxConcurrentChecks         int      `json:"max_concurrent_checks"`
-	ICMPTimeout                 int      `json:"icmp_timeout"`
+	ConnectionTimeout           int      `json:"connection_timeout"`
 	SuccessfulHTTPStatusCodes   []int    `json:"successful_http_status_codes"`
 	IgnoreHTTPSCertErrors       bool     `json:"ignore_https_cert_errors"`
 	FailedCheckThreshold        int      `json:"failed_check_threshold"`

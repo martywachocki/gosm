@@ -9,13 +9,12 @@ import (
 )
 
 var (
-	checkChannel      = make(chan *models.Service)
-	checkCountChannel chan (bool)
+	checkChannel chan (*models.Service)
 )
 
 // Start Starts the service checker process
 func Start() {
-	checkCountChannel = make(chan bool, models.CurrentConfig.MaxConcurrentChecks)
+	checkChannel = make(chan *models.Service, models.CurrentConfig.MaxConcurrentChecks)
 	go processChecks()
 	go checkOnlineServices()
 	checkPendingOfflineServices()
@@ -27,12 +26,11 @@ func checkOnlineServices() {
 			if len(models.CurrentServices) <= i {
 				break
 			}
-			if models.CurrentServices[i].Status != models.Online {
-				checkCountChannel <- true
+			if models.CurrentServices[i].Status == models.Online {
 				checkChannel <- &models.CurrentServices[i]
 			}
 		}
-		time.Sleep(time.Second * time.Duration(models.CurrentConfig.PendingOfflineCheckInterval))
+		time.Sleep(time.Second * time.Duration(models.CurrentConfig.CheckInterval))
 	}
 }
 
@@ -42,12 +40,11 @@ func checkPendingOfflineServices() {
 			if len(models.CurrentServices) <= i {
 				break
 			}
-			if models.CurrentServices[i].Status == models.Online {
-				checkCountChannel <- true
+			if models.CurrentServices[i].Status != models.Online {
 				checkChannel <- &models.CurrentServices[i]
 			}
 		}
-		time.Sleep(time.Second * time.Duration(models.CurrentConfig.CheckInterval))
+		time.Sleep(time.Second * time.Duration(models.CurrentConfig.PendingOfflineCheckInterval))
 	}
 }
 
@@ -61,6 +58,9 @@ func processChecks() {
 				go alerts.SendAlerts(*service)
 			} else if service.Status == models.Pending {
 				service.Status = models.Online
+				if models.CurrentConfig.Verbose {
+					fmt.Println(service.Name + " is now in the " + service.Status + " state")
+				}
 			}
 			service.FailureCount = 0
 		} else {
@@ -78,6 +78,5 @@ func processChecks() {
 				}
 			}
 		}
-		<-checkCountChannel
 	}
 }

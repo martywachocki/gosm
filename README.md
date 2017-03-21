@@ -29,7 +29,7 @@ The application expects the configuration file to be named config.json. There is
 * **check_interval** - How often to check each service that is in an online state (seconds)
 * **pending_offline_interval** - How often to check each service is in a pending or offline state (seconds)
 * **max_concurrent_checks** - The maximum concurrent checks
-* **icmp_timeout** - Timeout threshold for ICMP (milliseconds)
+* **connection_timeout** - Timeout threshold for checks (milliseconds)
 * **successful_http_status_codes** - Which HTTP/HTTPS status codes are considered successful. Any status code not listed will be considered a failure response
 * **ignore_https_cert_errors** - Whether or not to ignore HTTPS cert errors
 * **failed_check_threshold** - How many consecutive failed checks are needed to consider a service offline
@@ -49,6 +49,6 @@ The application expects the configuration file to be named config.json. There is
 
 ### TODO
 * Implement SMTP and SMTP-TLS checks
-* Optional limits email/sms alerts per second
-* Redesign to use sqlite database instead of JSON config files
-* Adding/editing/removing services, and reporting on service status history
+* Add optional limits for email/sms alerts per second
+* Add service status history to web UI
+* Refactor to store config items in sqlite database and modify through web UI instead of JSON file
