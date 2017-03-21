@@ -3,3 +3,5 @@
 config.json
 data/gosm.db
 vendor/
+build
+build/
