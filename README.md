@@ -10,7 +10,7 @@ A program written in Golang for monitoring services using various protocols list
 * ICMP
 * TCP
 
-### Installation
+### Installing from Source
 ~~~
 # Download and install dependencies
 $ go get -u github.com/martywachocki/gosm

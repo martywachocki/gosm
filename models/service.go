@@ -104,6 +104,12 @@ func LoadServices() {
 
 	for i := range services {
 		services[i].Status = Online
+		for j := range CurrentServices {
+			if CurrentServices[j].ID == services[i].ID {
+				services[i] = CurrentServices[i]
+				break
+			}
+		}
 	}
 	CurrentServices = services
 }

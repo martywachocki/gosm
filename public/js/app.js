@@ -165,6 +165,6 @@ $(function() {
     });
 
     getServices();
-    // setInterval(getServices, 2000);
+    setInterval(getServices, 2000);
 
 });
