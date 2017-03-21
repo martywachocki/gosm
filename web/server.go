@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"../models"
 	"github.com/gorilla/mux"
+	"github.com/martywachocki/gosm/models"
 )
 
 var (

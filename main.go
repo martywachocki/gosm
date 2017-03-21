@@ -5,9 +5,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"./checker"
-	"./models"
-	"./web"
+	"github.com/martywachocki/gosm/checker"
+	"github.com/martywachocki/gosm/models"
+	"github.com/martywachocki/gosm/web"
 )
 
 var (

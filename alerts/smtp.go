@@ -5,7 +5,7 @@ import (
 	"net/smtp"
 	"strconv"
 
-	"../models"
+	"github.com/martywachocki/gosm/models"
 )
 
 func sendSMTPAlert(service models.Service) {

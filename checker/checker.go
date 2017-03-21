@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"../alerts"
-	"../models"
+	"github.com/martywachocki/gosm/alerts"
+	"github.com/martywachocki/gosm/models"
 )
 
 var (

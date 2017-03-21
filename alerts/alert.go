@@ -3,7 +3,7 @@ package alerts
 import (
 	"fmt"
 
-	"../models"
+	"github.com/martywachocki/gosm/models"
 )
 
 // SendAlerts Sends the alerts for a services current status

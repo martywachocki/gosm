@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"../models"
 	"github.com/gorilla/mux"
+	"github.com/martywachocki/gosm/models"
 )
 
 func services(writer http.ResponseWriter, request *http.Request) {
