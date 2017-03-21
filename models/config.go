@@ -9,6 +9,8 @@ import (
 // Config The application configuration and settings
 type Config struct {
 	Verbose                     bool     `json:"verbose"`
+	WebUIHost                   string   `json:"web_ui_host"`
+	WebUIPort                   int      `json:"web_ui_port"`
 	CheckInterval               int      `json:"check_interval"`
 	PendingOfflineCheckInterval int      `json:"pending_offline_check_interval"`
 	MaxConcurrentChecks         int      `json:"max_concurrent_checks"`

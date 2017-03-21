@@ -1,14 +1,12 @@
 package web
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
+	"../models"
 	"github.com/gorilla/mux"
-)
-
-const (
-	port = 8080
 )
 
 var (
@@ -25,7 +23,10 @@ func Start() {
 	fs := http.FileServer(http.Dir("./public/"))
 	router.PathPrefix("/").Handler(fs)
 
-	err := http.ListenAndServe(":"+strconv.Itoa(port), router)
+	if models.CurrentConfig.Verbose {
+		fmt.Println("Starting web UI accessible at http://" + models.CurrentConfig.WebUIHost + ":" + strconv.Itoa(models.CurrentConfig.WebUIPort) + "/")
+	}
+	err := http.ListenAndServe(models.CurrentConfig.WebUIHost+":"+strconv.Itoa(models.CurrentConfig.WebUIPort), router)
 	if err != nil {
 		panic(err)
 	}

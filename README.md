@@ -12,22 +12,24 @@ A program written in Golang for monitoring services using various protocols list
 ### Installation
 ~~~
 # Download and install dependencies
-$ go get -u github.com/MartinWachocki/gosm
+$ go get -u github.com/martywachocki/gosm
 
 # Build program
-$ cd $GOPATH/src/github.com/MartinWachocki/gosm
+$ cd $GOPATH/src/github.com/martywachocki/gosm
 $ go build
 
-# Run program
-$ ./gosm
+# Run program and supply path to config file
+$ ./gosm /path/to/config.json
 ~~~ 
 
 ### Web UI
-By default, the web UI listens on :8080, and can be accessed in your browser at http://localhost:8080. The web UI currently gives you access to view the realtime status of your services, and add/edit/remove services. 
+By default, the web UI listens on localhost on port 8030, and can be accessed in your browser at http://127.0.0.1:8030. The web UI currently gives you access to view the realtime status of your services, and add/edit/remove services. 
 
 ### Config
-The application expects the configuration file to be named config.json. There is an example config file in the repo named config.example.json to use as a reference. Below is a brief description of each configuration item. All items are required unless explicity stated.
+There is an example config file in the repo named config.example.json to use as a reference. Below is a brief description of each configuration item. All items are required unless explicity stated.
 * **verbose** - Whether or not to print information to the console
+* **web_ui_host** - The host the web UI will listen on
+* **web_ui_Port** - The port the web UI will listen on
 * **check_interval** - How often to check each service that is in an online state (seconds)
 * **pending_offline_interval** - How often to check each service is in a pending or offline state (seconds)
 * **max_concurrent_checks** - The maximum concurrent checks
@@ -54,3 +56,4 @@ The application expects the configuration file to be named config.json. There is
 * Add optional limits for email/sms alerts per second
 * Add service status history to web UI
 * Refactor to store config items in sqlite database and modify through web UI instead of JSON file
+* Add optional authentication
