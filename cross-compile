@@ -1,0 +1,30 @@
+#!/bin/bash
+start_time=`date +%s`
+platforms="darwin/386 darwin/amd64 freebsd/386 freebsd/amd64 freebsd/arm linux/386 linux/amd64 linux/arm windows/386 windows/amd64"
+if [ -d "$DIRECTORY" ]; then
+    rm -rf builds/*
+else
+    mkdir builds/
+fi
+for platform in ${platforms}
+do
+    split=(${platform//\// })
+    goos=${split[0]}
+    goarch=${split[1]}
+    mkdir builds/gosm_$goos\_$goarch
+    mkdir builds/gosm_$goos\_$goarch/data
+    cp config.example.json builds/gosm_$goos\_$goarch/
+    cp data/setup.sql builds/gosm_$goos\_$goarch/data/
+    cp -R public/ builds/gosm_$goos\_$goarch/
+	env GOOS=$goos GOARCH=$goarch go build -v github.com/martywachocki/gosm
+    if [ "$goos" = "windows" ]; then
+    mv gosm.exe builds/gosm_$goos\_$goarch/
+    else
+    mv gosm builds/gosm_$goos\_$goarch/
+    fi
+    cd builds/
+    zip -rm gosm_$goos\_$goarch.zip gosm_$goos\_$goarch/
+    cd ../
+done
+end_time=`date +%s`
+echo Execution time: `expr $end_time - $start_time`s.
