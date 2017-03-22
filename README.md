@@ -29,7 +29,7 @@ $ vi config.json
 $ ./gosm /path/to/config.json
 ~~~ 
 
-### Current Build Version - 1.01
+### Current Build Version - 1.02
 You can check the version of your build by running ``./gosm version``
 
 ### Web UI
