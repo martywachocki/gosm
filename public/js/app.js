@@ -21,13 +21,39 @@ $(function() {
             row.append('<td>' + service.host + '</td>');
             row.append('<td>' + (service.port ? service.port : 'N/A') + '</td>');
             row.append('<td class="' + getStatusTextClass(service.status) + '">' + service.status + '</td>');1
-            row.append('<td></td>');
+            row.append('<td>' + (service.status == 'ONLINE' ? timeSince(new Date(service.uptime_start * 1000)) : 'N/A') + '</td>');
             row.append('<td></td>');
             row.append('<td><button class="btn btn-sm btn-warning edit-service">Edit</button> <button class="btn btn-sm btn-danger delete-service">Delete</button></td>');
             tbody.append(row);
         }
         table.find('tbody').replaceWith(tbody);    
     }
+    
+    function timeSince(date) {
+        var seconds = Math.floor((new Date() - date) / 1000);
+        var interval = Math.floor(seconds / 31536000);
+        if (interval > 1) {
+            return interval + " years";
+        }
+        interval = Math.floor(seconds / 2592000);
+        if (interval > 1) {
+            return interval + " months";
+        }
+        interval = Math.floor(seconds / 86400);
+        if (interval > 1) {
+            return interval + " days";
+        }
+        interval = Math.floor(seconds / 3600);
+        if (interval > 1) {
+            return interval + " hours";
+        }
+        interval = Math.floor(seconds / 60);
+        if (interval > 1) {
+            return interval + " minutes";
+        }
+        return Math.floor(seconds) + " seconds";
+    }
+
     
     function getServices() {
         $.get('/services', function(services) {
