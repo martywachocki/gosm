@@ -21,7 +21,7 @@ $(function() {
             row.append('<td>' + service.host + '</td>');
             row.append('<td>' + (service.port ? service.port : 'N/A') + '</td>');
             row.append('<td class="' + getStatusTextClass(service.status) + '">' + service.status + '</td>');1
-            row.append('<td>' + (service.status == 'ONLINE' ? timeSince(new Date(service.uptime_start * 1000)) : 'N/A') + '</td>');
+            row.append('<td>' + (service.status != 'OFFLINE' ? timeSince(new Date(service.uptime_start * 1000)) : 'N/A') + '</td>');
             row.append('<td></td>');
             row.append('<td><button class="btn btn-sm btn-warning edit-service">Edit</button> <button class="btn btn-sm btn-danger delete-service">Delete</button></td>');
             tbody.append(row);
