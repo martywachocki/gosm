@@ -16,11 +16,11 @@ do
     cp config.example.json builds/gosm_$goos\_$goarch/
     cp data/setup.sql builds/gosm_$goos\_$goarch/data/
     cp -R public/ builds/gosm_$goos\_$goarch/
-	env GOOS=$goos GOARCH=$goarch go build -v github.com/martywachocki/gosm
+    env GOOS=$goos GOARCH=$goarch go build -v github.com/martywachocki/gosm
     if [ "$goos" = "windows" ]; then
-    mv gosm.exe builds/gosm_$goos\_$goarch/
+        mv gosm.exe builds/gosm_$goos\_$goarch/
     else
-    mv gosm builds/gosm_$goos\_$goarch/
+        mv gosm builds/gosm_$goos\_$goarch/
     fi
     cd builds/
     zip -rm gosm_$goos\_$goarch.zip gosm_$goos\_$goarch/
