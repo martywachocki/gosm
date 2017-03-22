@@ -26,7 +26,7 @@ type Service struct {
 	Protocol     string        `db:"protocol" json:"protocol"`
 	Host         string        `db:"host" json:"host"`
 	Port         jsonNullInt64 `db:"port" json:"port"`
-	UptimeStart  int64         `db:"uptime_start" json:"uptime_start"`
+	UptimeStart  jsonNullInt64 `db:"uptime_start" json:"uptime_start"`
 	Status       string        `json:"status"`
 	FailureCount int           `json:"failure_count"`
 }
@@ -105,8 +105,8 @@ func LoadServices() {
 
 	for i := range services {
 		services[i].Status = Online
-		if services[i].UptimeStart == 0 {
-			services[i].UptimeStart = time.Now().Unix()
+		if services[i].UptimeStart.Value == nil {
+			services[i].UptimeStart.Int64 = time.Now().Unix()
 		}
 		for j := range CurrentServices {
 			if CurrentServices[j].ID == services[i].ID {
