@@ -55,7 +55,7 @@ func processChecks() {
 		if online == true {
 			if service.Status == models.Offline {
 				service.Status = models.Online
-				service.UptimeStart.Int64 = time.Now().Unix()
+				service.UptimeStart = time.Now().Unix()
 				go alerts.SendAlerts(*service)
 			} else if service.Status == models.Pending {
 				service.Status = models.Online

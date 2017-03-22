@@ -3,6 +3,5 @@ CREATE TABLE services (
     name TEXT NOT NULL,
     protocol TEXT NOT NULL,
     host TEXT NOT NULL,
-    port TEXT,
-    uptime_start INTEGER
+    port TEXT
 );
