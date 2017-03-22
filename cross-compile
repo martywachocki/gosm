@@ -1,7 +1,7 @@
 #!/bin/bash
 start_time=`date +%s`
 platforms="darwin/386 darwin/amd64 freebsd/386 freebsd/amd64 freebsd/arm linux/386 linux/amd64 linux/arm windows/386 windows/amd64"
-if [ -d "$DIRECTORY" ]; then
+if [ -d "builds/" ]; then
     rm -rf builds/*
 else
     mkdir builds/
